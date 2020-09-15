@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shangguan.Mybatis.mapper.SchoolMapper">
+    <select id="queryAll" resultType="School">
+        select * from school
+    </select>
+    <select id="queryById" resultType="School">
+        select * from school where sid = #{sId}
+    </select>
+
+    <insert id="addSchool" parameterType="School">
+        insert into school (sname,saddress,sdescription)values(#{sName},#{sAddress},#{sDescription})
+    </insert>
+    <update id="updateSchool" parameterType="School">
+        update school set sname=#{sName},saddress= #{sAddress},sdescription=#{sDescription}  where sid=#{sId}
+    </update>
+    <delete id="deleteSchool" parameterType="School">
+        delete  from school where sid = #{sId}
+    </delete>
+
+    <select id="queryLikeName" resultType="School" parameterType="string">
+        <!-- select * from school where sname like concat('%',#{same},'%')-->
+        select * from school where  sname like '%${sname}%'
+    </select>
+</mapper>
